@@ -43,12 +43,11 @@ jobs:
       - name: 42Crunch REST API Static Security Testing
         uses: 42Crunch/api-security-audit-action@f3a4f4d44ca6f538fe84361373d7a2a374018fdd
         with:
-          # Please create free account at https://platform.42crunch.com/register
           # Follow these steps to configure API_TOKEN https://docs.42crunch.com/latest/content/tasks/integrate_github_actions.htm
           
           # platform specific data
           platform-url: https://demolabs.42crunch.cloud
-          api-token: ${{ secrets.DEMOLABS_42C }}
+          api-token: ${{ secrets.CICD_42C }}
           # Fail if any OpenAPI file scores lower than 70
           min-score: 70
           # Upload results to Github code scanning
