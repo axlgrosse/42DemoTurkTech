@@ -11,4 +11,4 @@ jobs:
         echo "response from curl= $response"
         
         docker pull 42crunch/scand-agent:v2.0.0
-        docker run -e SCAN_TOKEN=scan_133a93fb-88ad-4f5e-be04-5881db65a5c6 -e SCAN42C_SECURITY_ACCESS_TOKEN=$response -e PLATFORM_SERVICE=services.platform.42crunch.com:8001 -e SCAN42C_user=userscan-run@acme.com -e SCAN42C_pass=hellopixi 42crunch/scand-agent:v2.0.0
+        docker run -e SCAN_TOKEN=scan_133a93fb-88ad-4f5e-be04-5881db65a5c6 -e SCAN42C_SECURITY_ACCESS_TOKEN=$response -e PLATFORM_SERVICE=services.42crunch.com:8001 -e SCAN42C_user=userscan-run@acme.com -e SCAN42C_pass=hellopixi 42crunch/scand-agent:v2.0.0
