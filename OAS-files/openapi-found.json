@@ -125,7 +125,21 @@
             }
           }
         ],
-        "responses": {},
+        "responses": { 
+          "200":{
+            "description": "list all users",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items":{
+                    "$ref": "#/components/schemas/UsersListItem"
+                  }
+                }
+              }
+            }
+          }
+        },
         "security": [
           {
             "apiKey_x-access-token_header": []
@@ -144,7 +158,23 @@
             }
           }
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "successful authentication sent user information",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "maxItems": 1,
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UsersItem"
+                        }
+                    }
+                }
+            }
+        }
+        },
         "security": [
           {
             "apiKey_x-access-token_header": []
@@ -164,10 +194,12 @@
           },
           "user": {
             "type": "string",
-            "pattern": "^[\\w\\-+.]+@((\\w\\-?)+\\.){1,4}[a-zA-Z0-9]{2,63}$",
+            "pattern": "^\\w+(?:[\\-.]\\w+)*@[0-9A-Za-z]+(?:[\\-.][0-9A-Za-z]+)*\\.(?:[A-Za-z][0-9A-Za-z]+|[0-9]+[A-Za-z][0-9A-Za-z]*)$",
             "minLength": 5,
             "maxLength": 68,
-            "format": "email"
+            "format": "email",
+            "example": "foo@bar.com",
+            "x-42c-format": "o:email"
           },
           "pass": {
             "type": "string",
@@ -249,7 +281,9 @@
             "pattern": "^(?:(?:(?:[A-Za-z0-9](?:[\\w\\-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[\\w\\-]{0,61}[A-Za-z0-9])?))*\\.[A-Za-z]{2,})|(?:(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3}|\\[(?:(?:(?:[0-9A-Fa-f]{1,4}):){6}(?:(?:[0-9A-Fa-f]{1,4}):(?:[0-9A-Fa-f]{1,4})|(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3})|::(?:(?:[0-9A-Fa-f]{1,4}):){5}(?:(?:[0-9A-Fa-f]{1,4}):(?:[0-9A-Fa-f]{1,4})|(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3})|(?:[0-9A-Fa-f]{1,4})?::(?:(?:[0-9A-Fa-f]{1,4}):){4}(?:(?:[0-9A-Fa-f]{1,4}):(?:[0-9A-Fa-f]{1,4})|(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3})|(?:(?:(?:[0-9A-Fa-f]{1,4}):){0,1}(?:[0-9A-Fa-f]{1,4}))?::(?:(?:[0-9A-Fa-f]{1,4}):){3}(?:(?:[0-9A-Fa-f]{1,4}):(?:[0-9A-Fa-f]{1,4})|(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3})|(?:(?:(?:[0-9A-Fa-f]{1,4}):){0,2}(?:[0-9A-Fa-f]{1,4}))?::(?:(?:[0-9A-Fa-f]{1,4}):){2}(?:(?:[0-9A-Fa-f]{1,4}):(?:[0-9A-Fa-f]{1,4})|(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3})|(?:(?:(?:[0-9A-Fa-f]{1,4}):){0,3}(?:[0-9A-Fa-f]{1,4}))?::(?:[0-9A-Fa-f]{1,4}):(?:(?:[0-9A-Fa-f]{1,4}):(?:[0-9A-Fa-f]{1,4})|(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3})|(?:(?:(?:[0-9A-Fa-f]{1,4}):){0,4}(?:[0-9A-Fa-f]{1,4}))?::(?:(?:[0-9A-Fa-f]{1,4}):(?:[0-9A-Fa-f]{1,4})|(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])(?:\\.(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])){3})|(?:(?:(?:[0-9A-Fa-f]{1,4}):){0,5}(?:[0-9A-Fa-f]{1,4}))?::(?:[0-9A-Fa-f]{1,4})|(?:(?:(?:[0-9A-Fa-f]{1,4}):){0,6}(?:[0-9A-Fa-f]{1,4}))?::)\\]))$",
             "minLength": 4,
             "maxLength": 255,
-            "format": "hostname"
+            "format": "hostname",
+            "example": "spec.openapis.org",
+            "x-42c-format": "o:hostname"
           }
         },
         "required": [
@@ -292,7 +326,125 @@
         "required": [
           "message"
         ]
+      },
+      "UsersListItem": {
+        "required": [
+            "email",
+            "name"
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "_id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "DD68C630-3CCB-4FD0-9C5B-A0A34C952681",
+                "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
+                "minLength": 36,
+                "maxLength": 36,
+                "x-42c-format": "o:uuid"
+            },
+            "pic": {
+                "maxLength": 2000,
+                "minLength": 0,
+                "pattern": "^(?:(?:[A-Za-z][A-Za-z0-9\\-+.]*):(?:(?://(?:(?:(?:(?:[A-Za-z0-9](?:[\\w\\-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[\\w\\-]{0,61}[A-Za-z0-9])?))*\\.[A-Za-z]{2,})|\\[[0-9A-Fa-f:]{3,48}\\])(?::[1-9][0-9]{0,4})?)(?:/(?:[\\w\\-.~!$&'()*+,;=%@:]+(?:/[\\w\\-.~!$&'()*+,;=%@:]*)*)?)?|(?:/(?:[\\w\\-.~!$&'()*+,;=%@:]+(?:/[\\w\\-.~!$&'()*+,;=%@:]*)*)?)|(?:[\\w\\-.~!$&'()*+,;=%@:]+(?:/[\\w\\-.~!$&'()*+,;=%@:]*)*))?(?:\\?[\\w\\-.~!$&'()*+,;=%@:/\\?]*)?(?:#[\\w\\-.~!$&'()*+,;=%@:/\\?]*)?)?)$",
+                "type": "string",
+                "format": "uri",
+                "x-42c-format": "o:uri"
+            },
+            "email": {
+              "maxLength": 68,
+              "minLength": 5,
+              "pattern": "^\\w+(?:[\\-.]\\w+)*@[0-9A-Za-z]+(?:[\\-.][0-9A-Za-z]+)*\\.(?:[A-Za-z][0-9A-Za-z]+|[0-9]+[A-Za-z][0-9A-Za-z]*)$",
+              "type": "string",
+              "format": "email",
+              "example": "email@email.com",
+              "x-42c-format": "o:email"
+            },
+            "name": {
+                "maxLength": 50,
+                "minLength": 5,
+                "pattern": "(^[\\w\\s\\.]{5,50}$)",
+                "type": "string",
+                "example": "Johnny Appleseed"
+            },
+            "account_balance": {
+                "maximum": 1000,
+                "minimum": -50,
+                "type": "number",
+                "description": "remaining balance",
+                "format": "float"
+            }
+        }
+    },
+    "UsersItem": {
+      "required": [
+          "email",
+          "password",
+          "name",
+          "_id",
+          "is_admin",
+          "account_balance",
+          "onboarding_date"
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+          "_id": {
+              "type": "string",
+              "format": "uuid",
+              "example": "DD68C630-3CCB-4FD0-9C5B-A0A34C952681",
+              "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
+              "minLength": 36,
+              "maxLength": 36,
+              "x-42c-format": "o:uuid"
+          },
+          "email": {
+            "maxLength": 68,
+            "minLength": 5,
+            "pattern": "^\\w+(?:[\\-.]\\w+)*@[0-9A-Za-z]+(?:[\\-.][0-9A-Za-z]+)*\\.(?:[A-Za-z][0-9A-Za-z]+|[0-9]+[A-Za-z][0-9A-Za-z]*)$",
+            "type": "string",
+            "format": "email",
+            "example": "email@email.com",
+            "x-42c-format": "o:email"
+          },
+          "password": {
+              "maxLength": 64,
+              "minLength": 8,
+              "pattern": "^[\\w&@#!?]{8,64}$",
+              "type": "string",
+              "format": "string",
+              "example": "p@ssword1"
+          },
+          "name": {
+              "maxLength": 50,
+              "minLength": 5,
+              "pattern": "(^[\\w\\s\\.]{5,50}$)",
+              "type": "string",
+              "example": "Johnny Appleseed"
+          },
+          "is_admin": {
+              "type": "boolean",
+              "description": "is admin"
+          },
+          "account_balance": {
+              "maximum": 1000,
+              "minimum": -50,
+              "type": "number",
+              "description": "remaining balance",
+              "format": "float"
+          },
+          "onboarding_date": {
+            "type": "string",
+            "maxLength": 38,
+            "format": "date-time",
+            "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:(?:[0-5][0-9]|60)(?:\\.[0-9]{1,15})?(?:Z|[+\\-](?:[01][0-9]|2[0-3]):[0-5][0-9])$",
+            "x-42c-format": "o:date-time",
+            "example": "2021-08-30T23:01:14.274085491+15:55",
+            "minLength": 20
+          }
       }
+  }
     },
     "securitySchemes": {
       "apiKey_x-access-token_header": {
